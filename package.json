@@ -1,0 +1,55 @@
+{
+  "name": "javascript-listener",
+  "version": "1.0.0",
+  "description": "JavaScriptのイベントをたくさん見られるサイト",
+  "author": "noplan1989 <lawson.and.7.11@gmail.com>",
+  "scripts": {
+    "dev": "nuxt --spa",
+    "font:subset": "node ./scripts/subset-japanese.js",
+    "font:woff": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff --output-file=./static/fonts/noto-serif-sub.woff",
+    "font:woff2": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff2 --output-file=./static/fonts/noto-serif-sub.woff2",
+    "font:build": "npm run font:subset;npm run font:woff;npm run font:woff2",
+    "build": "nuxt build --analyze",
+    "generate": "nuxt generate",
+    "deploy": "sh deploy.sh",
+    "format": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@nuxtjs/google-analytics": "^2.0.2",
+    "clipboard": "^2.0.1",
+    "devtools-detect": "^2.2.0",
+    "lodash": "^4.17.10",
+    "nuxt": "^1.0.0",
+    "nuxt-sass-resources-loader": "^2.0.3",
+    "sweet-scroll": "^3.0.1",
+    "vue-highlightjs": "^1.3.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^4.0.0",
+    "husky": "^0.14.3",
+    "jsdom": "^11.12.0",
+    "lint-staged": "^7.2.0",
+    "node-sass": "^4.9.2",
+    "prettier": "^1.13.7",
+    "sass-loader": "^7.0.3"
+  }
+}
