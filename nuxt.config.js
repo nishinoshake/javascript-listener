@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         name: 'twitter:image',
-        content: 'https://listener.noplan.cc/images/og.png?d=2018080401'
+        content: 'https://listener.noplan.cc/images/og.png?d=2018080705'
       },
       {
         property: 'og:site_name',
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         property: 'og:image',
-        content: 'https://listener.noplan.cc/images/og.png?d=2018080401'
+        content: 'https://listener.noplan.cc/images/og.png?d=2018080705'
       }
     ],
     link: [
