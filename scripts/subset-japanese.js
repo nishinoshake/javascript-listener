@@ -20,7 +20,7 @@ const scrape = async function() {
 
   for (let route of routes) {
     console.log(route)
-    console.log(nuxt)
+    console.log(nuxt.renderRoute)
     const { html } = await nuxt.renderRoute(route)
     const dom = new JSDOM(html)
 
