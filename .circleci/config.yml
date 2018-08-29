@@ -1,0 +1,67 @@
+version: 2
+jobs:
+  prepare:
+    docker:
+      - image: circleci/node:8.11.4
+    working_directory: ~/javascript-listener
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~/javascript-listener
+          paths:
+            - ./*
+  build:
+    docker:
+      - image: circleci/3.6-jessie-node-browsers
+    working_directory: ~/javascript-listener
+    steps:
+      - attach_workspace:
+          at: ~/javascript-listener
+      - run: sudo pip install fonttools
+      - run: yarn font:build
+      - run: yarn generate
+      - persist_to_workspace:
+          root: ~/javascript-listener
+          paths:
+            - dist
+  deploy:
+    docker:
+      - image: circleci/python:3.6-jessie
+    working_directory: ~/javascript-listener
+    steps:
+      - attach_workspace:
+          at: ~/javascript-listener
+      - run: sudo pip install awscli
+      - run: aws s3 sync ./dist/ s3://listener.noplan.cc --exact-timestamps --delete --exclude "*DS_Store" --cache-control max-age=31536000
+      - run: aws s3 cp ./dist/fonts/noto-serif-sub.woff2 s3://listener.noplan.cc/fonts/noto-serif-sub.woff2 --cache-control max-age=31536000 --content-type font/woff2
+      - run: aws s3 sync ./dist/ s3://listener.noplan.cc --exact-timestamps --delete --exclude "*" --include "*.html" --cache-control no-store
+      - run: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - prepare
+      - build:
+          requires:
+            - prepare
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - prepare
+            - build
+          filters:
+            branches:
+              only: master
