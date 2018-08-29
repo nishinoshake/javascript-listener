@@ -46,7 +46,7 @@ const main = async function() {
 
   nuxt.close()
 
-  console.log(japanese)
+  process.exit(0)
 }
 
 main()
