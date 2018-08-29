@@ -22,7 +22,7 @@ jobs:
             - ./*
   build:
     docker:
-      - image: circleci/3.6-jessie-node-browsers
+      - image: circleci/python:3.6-jessie-node-browsers
     working_directory: ~/javascript-listener
     steps:
       - attach_workspace:
