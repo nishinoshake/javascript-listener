@@ -19,6 +19,8 @@ const scrape = async function() {
   let text = ''
 
   for (let route of routes) {
+    console.log(route)
+    console.log(nuxt)
     const { html } = await nuxt.renderRoute(route)
     const dom = new JSDOM(html)
 
