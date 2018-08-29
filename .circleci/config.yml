@@ -28,7 +28,10 @@ jobs:
       - attach_workspace:
           at: ~/javascript-listener
       - run: sudo pip install fonttools
-      - run: yarn font:build
+      - run: node -v
+      - run: yarn font:subset
+      - run: yarn font:woff
+      - run: yarn font:woff2
       - run: yarn generate
       - persist_to_workspace:
           root: ~/javascript-listener
