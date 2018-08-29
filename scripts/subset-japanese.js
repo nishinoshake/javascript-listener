@@ -19,8 +19,6 @@ const scrape = async function() {
   let text = ''
 
   for (let route of routes) {
-    console.log(route)
-    console.log(nuxt.renderRoute)
     const { html } = await nuxt.renderRoute(route)
     const dom = new JSDOM(html)
 
@@ -47,6 +45,8 @@ const main = async function() {
   fs.writeFileSync(subsetPath, japanese)
 
   nuxt.close()
+
+  console.log(japanese)
 }
 
 main()
