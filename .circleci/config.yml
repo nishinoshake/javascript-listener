@@ -27,7 +27,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/javascript-listener
-      - run: sudo pip install fonttools
+      - run: sudo pip install fonttools brotli
       - run: node -v
       - run: yarn font:subset
       - run: yarn font:woff
