@@ -1,9 +1,18 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/javascript-listener
+  docker:
+    - image: circleci/python:3.6-jessie-node-browsers
+
+filter_only_master: &filter_only_master
+  filters:
+    branches:
+      only: master
+
 jobs:
   prepare:
-    docker:
-      - image: circleci/node:8.11.4
-    working_directory: ~/javascript-listener
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -21,14 +30,11 @@ jobs:
           paths:
             - ./*
   build:
-    docker:
-      - image: circleci/python:3.6-jessie-node-browsers
-    working_directory: ~/javascript-listener
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/javascript-listener
       - run: sudo pip install fonttools brotli
-      - run: node -v
       - run: yarn font:subset
       - run: yarn font:woff
       - run: yarn font:woff2
@@ -38,9 +44,7 @@ jobs:
           paths:
             - dist
   deploy:
-    docker:
-      - image: circleci/python:3.6-jessie
-    working_directory: ~/javascript-listener
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/javascript-listener
@@ -56,15 +60,10 @@ workflows:
     jobs:
       - prepare
       - build:
+          <<: *filter_only_master
           requires:
             - prepare
-          filters:
-            branches:
-              only: master
       - deploy:
+          <<: *filter_only_master
           requires:
-            - prepare
             - build
-          filters:
-            branches:
-              only: master
