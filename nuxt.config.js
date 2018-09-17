@@ -66,7 +66,8 @@ module.exports = {
       {
         id: 'UA-53153991-16'
       }
-    ]
+    ],
+    '@/modules/count-page'
   ],
   router: {
     middleware: ['console', 'event-remover'],
