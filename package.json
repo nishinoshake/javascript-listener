@@ -4,7 +4,7 @@
   "description": "JavaScriptのイベントをたくさん見られるサイト",
   "author": "noplan1989 <lawson.and.7.11@gmail.com>",
   "scripts": {
-    "dev": "nuxt --spa",
+    "dev": "nuxt",
     "font:subset": "node ./scripts/subset-japanese.js",
     "font:woff": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff --output-file=./static/fonts/noto-serif-sub.woff",
     "font:woff2": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff2 --output-file=./static/fonts/noto-serif-sub.woff2",
