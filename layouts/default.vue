@@ -36,6 +36,7 @@ html {
 body {
   font-size: 1.6rem;
   color: $color-text;
+  background-color: $color-bg;
   @include font-serif;
 }
 .pc {

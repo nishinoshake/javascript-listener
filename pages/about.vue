@@ -22,15 +22,12 @@ export default {
 
 <style lang="scss" scoped>
 .about {
-  @include min {
-    padding: 4rem 0 6rem;
-  }
   &-text {
     font-size: 2rem;
     letter-spacing: 0.05em;
     line-height: 2;
     @include min {
-      font-size: 3rem;
+      font-size: 2.6rem;
     }
     &:nth-child(n + 2) {
       margin-top: 3rem;

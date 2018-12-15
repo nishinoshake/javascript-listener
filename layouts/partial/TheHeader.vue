@@ -47,6 +47,7 @@ export default {
   position: relative;
   z-index: 1;
   padding: 3.3rem 2rem 4rem;
+  background-color: $color-white;
   @include min {
     padding: 6rem;
     display: flex;

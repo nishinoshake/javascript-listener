@@ -15,6 +15,7 @@
 .footer {
   padding: 3.5rem;
   position: relative;
+  background-color: $color-white;
   @include min {
     padding: 6rem;
   }

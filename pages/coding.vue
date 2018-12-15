@@ -28,11 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.coding {
-  @include min {
-    padding: 4rem 0 8rem;
-  }
-}
-</style>
