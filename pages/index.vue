@@ -32,9 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .mokuji {
-  @include min {
-    padding-bottom: 6rem;
-  }
   &-list {
     margin-top: 3rem;
     @include min {
