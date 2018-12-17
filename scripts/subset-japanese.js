@@ -1,7 +1,6 @@
-const jsdom = require('jsdom')
-const path = require('path')
 const fs = require('fs')
-const { JSDOM } = jsdom
+const path = require('path')
+const { JSDOM } = require('jsdom')
 const { Nuxt, Builder } = require('nuxt')
 
 const configPath = path.resolve(__dirname, '../nuxt.config.js')
@@ -13,17 +12,20 @@ const listen = async function() {
   await nuxt.listen(4000, 'localhost')
 }
 
-const scrape = async routes => {
-  const text = await Promise.all(
-    routes.map(async route => {
-      const { html } = await nuxt.renderRoute(route)
-      const dom = new JSDOM(html)
+const scrape = async route => {
+  const { html } = await nuxt.renderRoute(route)
+  const dom = new JSDOM(html)
+  const { body } = dom.window.document
 
-      return dom.window.document.body.textContent
-    })
-  )
+  body.querySelectorAll('script, style').forEach(el => el.remove())
 
-  return text.join('')
+  return body.textContent
+}
+
+const scrapeAll = async routes => {
+  const values = await Promise.all(routes.map(route => scrape(route)))
+
+  return values.join('')
 }
 
 const subset = (text, regex) =>
@@ -38,7 +40,7 @@ const main = async function() {
   const japaneseRegex = /^[\u3040-\u309f\u30a0-\u30ff\u3001-\u3007\u4e00-\u9fef\uf900-\ufaff]$/
 
   await listen()
-  const text = await scrape(routes)
+  const text = await scrapeAll(routes)
   const japanese = subset(text, japaneseRegex)
 
   fs.writeFileSync(subsetPath, japanese)

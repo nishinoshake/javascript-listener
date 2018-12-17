@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nuxt",
     "font:subset": "node ./scripts/subset-japanese.js",
-    "font:woff": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff --output-file=./static/fonts/noto-serif-sub.woff",
-    "font:woff2": "pyftsubset ./static/fonts/noto-serif.otf --text-file=./scripts/subset.txt --flavor=woff2 --output-file=./static/fonts/noto-serif-sub.woff2",
+    "font:woff": "pyftsubset ./assets/fonts/noto-serif.otf  --layout-features='' --text-file=./scripts/subset.txt --flavor=woff --output-file=./assets/fonts/noto-serif-sub.woff",
+    "font:woff2": "pyftsubset ./assets/fonts/noto-serif.otf  --layout-features='' --text-file=./scripts/subset.txt --flavor=woff2 --output-file=./assets/fonts/noto-serif-sub.woff2",
     "font:build": "npm run font:subset;npm run font:woff;npm run font:woff2",
     "build": "nuxt build --analyze",
     "generate": "nuxt generate",

@@ -30,6 +30,18 @@ export default {
 // このファイル以外では@/components/CodeBlock.vueのスタイルが、
 // highlight.jsのスタイルを正しくあてるためにグローバルになっています。
 // ==========================================================================
+
+/*!
+ * Noto Serif CJK JP licensed under the SIL Open Font License
+ * https://www.google.com/get/noto/
+ */
+@font-face {
+  font-family: 'Noto Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: url(~assets/fonts/noto-serif-sub.woff2) format('woff2'), url(~assets/fonts/noto-serif-sub.woff) format('woff');
+}
+
 html {
   font-size: 62.5%;
 }
